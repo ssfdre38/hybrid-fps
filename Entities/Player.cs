@@ -53,7 +53,7 @@ namespace HybridFPS.Entities
         private void HandleMouseLook()
         {
             Vector2 mouseDelta = Raylib.GetMouseDelta();
-            yaw += mouseDelta.X * MOUSE_SENSITIVITY;
+            yaw -= mouseDelta.X * MOUSE_SENSITIVITY;  // Fixed: reversed for correct mouse direction
             pitch -= mouseDelta.Y * MOUSE_SENSITIVITY;
             pitch = Math.Clamp(pitch, -1.5f, 1.5f);
 
@@ -79,10 +79,11 @@ namespace HybridFPS.Entities
 
             Vector3 moveDir = Vector3.Zero;
 
-            if (Raylib.IsKeyDown(KeyboardKey.W)) moveDir += forward;
-            if (Raylib.IsKeyDown(KeyboardKey.S)) moveDir -= forward;
-            if (Raylib.IsKeyDown(KeyboardKey.D)) moveDir += right;
-            if (Raylib.IsKeyDown(KeyboardKey.A)) moveDir -= right;
+            // Fixed: Swapped W/S for correct forward/backward movement
+            if (Raylib.IsKeyDown(KeyboardKey.W)) moveDir -= forward;  // W = forward (negative Z in this coord system)
+            if (Raylib.IsKeyDown(KeyboardKey.S)) moveDir += forward;  // S = backward
+            if (Raylib.IsKeyDown(KeyboardKey.A)) moveDir -= right;     // A = left
+            if (Raylib.IsKeyDown(KeyboardKey.D)) moveDir += right;     // D = right
 
             if (moveDir.LengthSquared() > 0)
             {
