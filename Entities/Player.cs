@@ -79,9 +79,9 @@ namespace HybridFPS.Entities
 
             Vector3 moveDir = Vector3.Zero;
 
-            // Fixed: Swapped W/S for correct forward/backward movement
-            if (Raylib.IsKeyDown(KeyboardKey.W)) moveDir -= forward;  // W = forward (negative Z in this coord system)
-            if (Raylib.IsKeyDown(KeyboardKey.S)) moveDir += forward;  // S = backward
+            // Fixed: Correct forward/backward movement
+            if (Raylib.IsKeyDown(KeyboardKey.W)) moveDir += forward;  // W = forward
+            if (Raylib.IsKeyDown(KeyboardKey.S)) moveDir -= forward;  // S = backward
             if (Raylib.IsKeyDown(KeyboardKey.A)) moveDir -= right;     // A = left
             if (Raylib.IsKeyDown(KeyboardKey.D)) moveDir += right;     // D = right
 
